@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SoulRank™ – Life Path Decoder</title>
-  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Quicksand&display=swap" rel="stylesheet">
   <style>
     body {
@@ -28,9 +27,6 @@
     header p {
       font-size: 1.2rem;
       color: #B0AFAF;
-    }
-    main {
-      padding: 2rem;
     }
     .soul-form {
       max-width: 600px;
@@ -64,6 +60,21 @@
     .soul-form button:hover {
       background: #C294F5;
     }
+    #result {
+      margin-top: 2rem;
+      font-size: 1.3rem;
+      color: #F4E9D8;
+    }
+    .redirect {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #FFD580;
+      color: #111;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
     footer {
       margin-top: 4rem;
       font-size: 0.9rem;
@@ -73,12 +84,12 @@
 </head>
 <body>
   <header>
-    <h1>🌀 SoulRank™</h1>
+    <h1>🌌 SoulRank™</h1>
     <p>Decode your Soul Path. Align with your energetic blueprint.</p>
   </header>
   <main>
     <div class="soul-form">
-      <form action="#">
+      <form id="soulForm">
         <label for="fullname">📝 Full Name</label>
         <input type="text" id="fullname" name="fullname" required>
 
@@ -87,10 +98,40 @@
 
         <button type="submit">🔮 Reveal My SoulRank</button>
       </form>
+      <div id="result"></div>
     </div>
   </main>
   <footer>
     <p>Copyright © 2025 SoulRank™ by Jxnesyy</p>
   </footer>
+
+  <script>
+    const ranks = [
+      {
+        name: "Builder",
+        message: "You are the 🔨 Builder. Structured, reliable, and a master manifestor of grounded success.",
+        link: "https://gumroad.com/l/soulrank-builder"
+      },
+      {
+        name: "Guardian",
+        message: "You are the 🛡️ Guardian. Protector of energy, keeper of secrets, and force of divine order.",
+        link: "https://gumroad.com/l/soulrank-guardian"
+      },
+      {
+        name: "Ascended",
+        message: "You are the 🦋 Ascended. An enlightened being with celestial purpose and timeless intuition.",
+        link: "https://gumroad.com/l/soulrank-ascended"
+      }
+    ];
+
+    document.getElementById('soulForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const chosen = ranks[Math.floor(Math.random() * ranks.length)];
+      document.getElementById('result').innerHTML = `
+        <p>${chosen.message}</p>
+        <a class="redirect" href="${chosen.link}" target="_blank">Unlock My ${chosen.name} Report</a>
+      `;
+    });
+  </script>
 </body>
 </html>
