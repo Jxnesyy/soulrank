@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoulRank™ Decoder</title>
+  <title>SoulRank™ Reveal</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0e0b1a;
+      background: #0b0a13;
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -15,36 +15,45 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
+      padding: 2rem;
       text-align: center;
-      padding: 1rem;
     }
     h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+      font-size: 2.2rem;
+      margin-bottom: 0.3rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 1rem;
     }
     p {
       font-size: 1rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
+      color: #ccc;
     }
     input[type="date"] {
-      padding: 0.5rem;
+      padding: 0.6rem;
       font-size: 1rem;
       border-radius: 5px;
       border: none;
       margin-bottom: 1rem;
     }
     button {
-      padding: 0.6rem 1.5rem;
+      padding: 0.7rem 1.6rem;
       font-size: 1rem;
       border: none;
-      border-radius: 5px;
-      background: linear-gradient(135deg, #a64ac9, #5e60ce);
+      border-radius: 6px;
+      background: linear-gradient(135deg, #b624fe, #7a6ff0);
       color: white;
       cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button:hover {
+      transform: scale(1.05);
     }
     #loading {
       margin-top: 1rem;
-      color: #9999ff;
+      color: #bfbfff;
       font-style: italic;
     }
     #result {
@@ -52,10 +61,10 @@
     }
     a.button-link {
       display: inline-block;
-      margin-top: 1rem;
+      margin-top: 1.2rem;
       background: #ff5f9e;
-      padding: 0.7rem 1.3rem;
-      border-radius: 5px;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
       color: white;
       font-weight: bold;
       text-decoration: none;
@@ -63,8 +72,8 @@
   </style>
 </head>
 <body>
-  <h1>🔮 SoulRank™ Decoder</h1>
-  <p>Enter your birth date to discover your SoulRank™ and unlock your destiny.</p>
+  <h1>🎴 What Does Your Birthday Say About You?</h1>
+  <p>This 5-second soul test is exposing hidden gifts, callings, and the truth behind your energy signature.</p>
   <input type="date" id="dob" />
   <button onclick="revealSoulRank()">✨ Reveal My SoulRank™</button>
 
@@ -91,19 +100,19 @@
         const tiers = [
           {
             title: "🧱 Builder SoulRank™",
-            desc: "You are the foundation. Reliable, structured, and essential to the greater mission.",
+            desc: "You were born to construct. Your mind is organized, grounded, and powerful.",
             url: "https://jonesy836.gumroad.com/l/jhafnb",
             price: "£3.33"
           },
           {
             title: "🛡️ Guardian SoulRank™",
-            desc: "You protect, guide, and restore balance. The spiritual shield for others.",
+            desc: "You protect energy fields, guard hearts, and restore spiritual order.",
             url: "https://jonesy836.gumroad.com/l/neesb",
             price: "£5.55"
           },
           {
             title: "🌌 Ascended SoulRank™",
-            desc: "You’ve unlocked Tier 33. A divine channel for transformation and truth.",
+            desc: "You carry rare divine codes. Your life path reveals Tier 33 — few are chosen.",
             url: "https://jonesy836.gumroad.com/l/wyezv",
             price: "£7.77"
           }
@@ -114,9 +123,9 @@
         result.innerHTML = `
           <h2>${chosen.title}</h2>
           <p>${chosen.desc}</p>
-          <a href="${chosen.url}" class="button-link" target="_blank">🔓 Unlock Report – ${chosen.price}</a>
+          <a href="${chosen.url}" class="button-link" target="_blank">🔓 Unlock Full Soul Report – ${chosen.price}</a>
         `;
-      }, 2000);
+      }, 1800);
     }
   </script>
 </body>
