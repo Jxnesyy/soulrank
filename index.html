@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoulRank™ – The Life Path Decoder</title>
+  <title>SoulRank™ Decoder</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      background: #0e0b1a;
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -16,103 +16,105 @@
       height: 100vh;
       margin: 0;
       text-align: center;
+      padding: 1rem;
     }
     h1 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       margin-bottom: 0.5rem;
     }
     p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
     }
     input[type="date"] {
       padding: 0.5rem;
       font-size: 1rem;
       border-radius: 5px;
       border: none;
+      margin-bottom: 1rem;
     }
     button {
-      margin-top: 1rem;
-      padding: 0.7rem 2rem;
+      padding: 0.6rem 1.5rem;
       font-size: 1rem;
       border: none;
       border-radius: 5px;
-      background-color: #ff00cc;
-      background-image: linear-gradient(315deg, #ff00cc 0%, #333399 74%);
+      background: linear-gradient(135deg, #a64ac9, #5e60ce);
       color: white;
       cursor: pointer;
-      transition: background 0.3s ease;
     }
-    button:hover {
-      background-image: linear-gradient(315deg, #ff33cc 0%, #6666ff 74%);
+    #loading {
+      margin-top: 1rem;
+      color: #9999ff;
+      font-style: italic;
     }
     #result {
       margin-top: 2rem;
-      font-size: 1.5rem;
     }
-    #loading {
-      display: none;
-      font-size: 1.2rem;
-      margin-top: 2rem;
-      color: #ccccff;
-    }
-    a {
-      color: #66ffcc;
+    a.button-link {
+      display: inline-block;
+      margin-top: 1rem;
+      background: #ff5f9e;
+      padding: 0.7rem 1.3rem;
+      border-radius: 5px;
+      color: white;
       font-weight: bold;
       text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <h1>🔮 SoulRank™ – The Life Path Decoder</h1>
-  <p>Enter your date of birth and unlock your SoulRank™ destiny.</p>
-
+  <h1>🔮 SoulRank™ Decoder</h1>
+  <p>Enter your birth date to discover your SoulRank™ and unlock your destiny.</p>
   <input type="date" id="dob" />
-  <br />
-  <button onclick="decodeSoulRank()">✨ Reveal My SoulRank™</button>
-  <div id="loading">✨ Scanning the cosmos...</div>
+  <button onclick="revealSoulRank()">✨ Reveal My SoulRank™</button>
+
+  <div id="loading"></div>
   <div id="result"></div>
 
   <script>
-    function decodeSoulRank() {
+    function revealSoulRank() {
       const dob = document.getElementById("dob").value;
       const result = document.getElementById("result");
       const loading = document.getElementById("loading");
 
       if (!dob) {
-        result.innerHTML = "Please enter your date of birth.";
+        result.innerHTML = "Please enter your birthdate.";
         return;
       }
 
       result.innerHTML = "";
-      loading.style.display = "block";
+      loading.innerHTML = "✨ Scanning the stars...";
 
       setTimeout(() => {
-        loading.style.display = "none";
-        const ranks = [
+        loading.innerHTML = "";
+
+        const tiers = [
           {
-            title: "🧱 Builder Tier",
-            message: "You are a foundational force. Steady, powerful, and reliable.",
-            url: "https://jonesy836.gumroad.com/l/jhafnb"
+            title: "🧱 Builder SoulRank™",
+            desc: "You are the foundation. Reliable, structured, and essential to the greater mission.",
+            url: "https://jonesy836.gumroad.com/l/jhafnb",
+            price: "£3.33"
           },
           {
-            title: "🛡️ Guardian Tier",
-            message: "Protector of energy and emotions. You are here to guide and guard.",
-            url: "https://jonesy836.gumroad.com/l/neesb"
+            title: "🛡️ Guardian SoulRank™",
+            desc: "You protect, guide, and restore balance. The spiritual shield for others.",
+            url: "https://jonesy836.gumroad.com/l/neesb",
+            price: "£5.55"
           },
           {
-            title: "🌌 Ascended Tier",
-            message: "You’ve reached Tier 33. You are an activated soul on a divine mission.",
-            url: "https://jonesy836.gumroad.com/l/wyezv"
+            title: "🌌 Ascended SoulRank™",
+            desc: "You’ve unlocked Tier 33. A divine channel for transformation and truth.",
+            url: "https://jonesy836.gumroad.com/l/wyezv",
+            price: "£7.77"
           }
         ];
 
-        const chosen = ranks[Math.floor(Math.random() * ranks.length)];
+        const chosen = tiers[Math.floor(Math.random() * tiers.length)];
 
         result.innerHTML = `
           <h2>${chosen.title}</h2>
-          <p>${chosen.message}</p>
-          <a href="${chosen.url}" target="_blank">🔓 Unlock Your SoulRank™ Report</a>
+          <p>${chosen.desc}</p>
+          <a href="${chosen.url}" class="button-link" target="_blank">🔓 Unlock Report – ${chosen.price}</a>
         `;
       }, 2000);
     }
