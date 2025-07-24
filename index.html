@@ -1,137 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SoulRank™ – Life Path Decoder</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Quicksand&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoulRank™ – The Life Path Decoder</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(to bottom right, #11121A, #2B1E42);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
       text-align: center;
     }
-    header {
-      padding: 3rem;
-      background: rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
     }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      letter-spacing: 2px;
-      color: #F4E9D8;
-    }
-    header p {
-      font-size: 1.2rem;
-      color: #B0AFAF;
-    }
-    .soul-form {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    }
-    .soul-form label, .soul-form input {
-      display: block;
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-    .soul-form input {
-      padding: 0.75rem;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-    .soul-form button {
-      background: #D2AFFF;
-      color: #111;
-      border: none;
-      padding: 0.9rem 2rem;
-      border-radius: 8px;
+    p {
       font-size: 1.1rem;
-      cursor: pointer;
-      transition: background 0.3s;
+      margin-bottom: 2rem;
     }
-    .soul-form button:hover {
-      background: #C294F5;
+    input[type="date"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.7rem 2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff00cc;
+      background-image: linear-gradient(315deg, #ff00cc 0%, #333399 74%);
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-image: linear-gradient(315deg, #ff33cc 0%, #6666ff 74%);
     }
     #result {
       margin-top: 2rem;
-      font-size: 1.3rem;
-      color: #F4E9D8;
+      font-size: 1.5rem;
     }
-    .redirect {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.75rem 1.5rem;
-      background: #FFD580;
-      color: #111;
-      text-decoration: none;
-      border-radius: 8px;
+    #loading {
+      display: none;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      color: #ccccff;
+    }
+    a {
+      color: #66ffcc;
       font-weight: bold;
-    }
-    footer {
-      margin-top: 4rem;
-      font-size: 0.9rem;
-      color: #666;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🌌 SoulRank™</h1>
-    <p>Decode your Soul Path. Align with your energetic blueprint.</p>
-  </header>
-  <main>
-    <div class="soul-form">
-      <form id="soulForm">
-        <label for="fullname">📝 Full Name</label>
-        <input type="text" id="fullname" name="fullname" required>
+  <h1>🔮 SoulRank™ – The Life Path Decoder</h1>
+  <p>Enter your date of birth and unlock your SoulRank™ destiny.</p>
 
-        <label for="dob">📅 Date of Birth</label>
-        <input type="date" id="dob" name="dob" required>
-
-        <button type="submit">🔮 Reveal My SoulRank</button>
-      </form>
-      <div id="result"></div>
-    </div>
-  </main>
-  <footer>
-    <p>Copyright © 2025 SoulRank™ by Jxnesyy</p>
-  </footer>
+  <input type="date" id="dob" />
+  <br />
+  <button onclick="decodeSoulRank()">✨ Reveal My SoulRank™</button>
+  <div id="loading">✨ Scanning the cosmos...</div>
+  <div id="result"></div>
 
   <script>
-    const ranks = [
-      {
-        name: "Builder",
-        message: "You are the 🔨 Builder. Structured, reliable, and a master manifestor of grounded success.",
-        link: "https://gumroad.com/l/soulrank-builder"
-      },
-      {
-        name: "Guardian",
-        message: "You are the 🛡️ Guardian. Protector of energy, keeper of secrets, and force of divine order.",
-        link: "https://gumroad.com/l/soulrank-guardian"
-      },
-      {
-        name: "Ascended",
-        message: "You are the 🦋 Ascended. An enlightened being with celestial purpose and timeless intuition.",
-        link: "https://gumroad.com/l/soulrank-ascended"
-      }
-    ];
+    function decodeSoulRank() {
+      const dob = document.getElementById("dob").value;
+      const result = document.getElementById("result");
+      const loading = document.getElementById("loading");
 
-    document.getElementById('soulForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const chosen = ranks[Math.floor(Math.random() * ranks.length)];
-      document.getElementById('result').innerHTML = `
-        <p>${chosen.message}</p>
-        <a class="redirect" href="${chosen.link}" target="_blank">Unlock My ${chosen.name} Report</a>
-      `;
-    });
+      if (!dob) {
+        result.innerHTML = "Please enter your date of birth.";
+        return;
+      }
+
+      result.innerHTML = "";
+      loading.style.display = "block";
+
+      setTimeout(() => {
+        loading.style.display = "none";
+        const ranks = [
+          {
+            title: "🧱 Builder Tier",
+            message: "You are a foundational force. Steady, powerful, and reliable.",
+            url: "https://jonesy836.gumroad.com/l/jhafnb"
+          },
+          {
+            title: "🛡️ Guardian Tier",
+            message: "Protector of energy and emotions. You are here to guide and guard.",
+            url: "https://jonesy836.gumroad.com/l/neesb"
+          },
+          {
+            title: "🌌 Ascended Tier",
+            message: "You’ve reached Tier 33. You are an activated soul on a divine mission.",
+            url: "https://jonesy836.gumroad.com/l/wyezv"
+          }
+        ];
+
+        const chosen = ranks[Math.floor(Math.random() * ranks.length)];
+
+        result.innerHTML = `
+          <h2>${chosen.title}</h2>
+          <p>${chosen.message}</p>
+          <a href="${chosen.url}" target="_blank">🔓 Unlock Your SoulRank™ Report</a>
+        `;
+      }, 2000);
+    }
   </script>
 </body>
 </html>
