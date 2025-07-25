@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoulRank™ Reveal</title>
+  <title>Soul Gateway</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,27 +19,16 @@
       text-align: center;
     }
     h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.3rem;
-    }
-    h2 {
-      font-size: 1.5rem;
-      margin-top: 1rem;
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
     }
     p {
       font-size: 1rem;
       margin-bottom: 1.2rem;
       color: #ccc;
     }
-    input[type="date"] {
-      padding: 0.6rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: none;
-      margin-bottom: 1rem;
-    }
     button {
-      padding: 0.7rem 1.6rem;
+      padding: 0.8rem 1.6rem;
       font-size: 1rem;
       border: none;
       border-radius: 6px;
@@ -47,14 +36,10 @@
       color: white;
       cursor: pointer;
       transition: transform 0.2s;
+      margin-top: 1rem;
     }
     button:hover {
       transform: scale(1.05);
-    }
-    #loading {
-      margin-top: 1rem;
-      color: #bfbfff;
-      font-style: italic;
     }
     #result {
       margin-top: 2rem;
@@ -72,61 +57,41 @@
   </style>
 </head>
 <body>
-  <h1>🎴 What Does Your Birthday Say About You?</h1>
-  <p>This 5-second soul test is exposing hidden gifts, callings, and the truth behind your energy signature.</p>
-  <input type="date" id="dob" />
-  <button onclick="revealSoulRank()">✨ Reveal My SoulRank™</button>
-
-  <div id="loading"></div>
+  <div id="funnel"></div>
   <div id="result"></div>
 
   <script>
-    function revealSoulRank() {
-      const dob = document.getElementById("dob").value;
-      const result = document.getElementById("result");
-      const loading = document.getElementById("loading");
-
-      if (!dob) {
-        result.innerHTML = "Please enter your birthdate.";
-        return;
+    const funnels = [
+      {
+        name: "Unmarked Path",
+        title: "🌌 The Unmarked Path™",
+        desc: "You chose a path before birth. This isn't it. Download your original soul blueprint.",
+        url: "https://jonesy836.gumroad.com/l/soulrank",
+        button: "🔥 UNSEAL MY ORIGINAL PATH"
+      },
+      {
+        name: "Memory Before",
+        title: "🧠 The Memory Before™",
+        desc: "You're trying to remember something you were never told. Unlock your suppressed incarnation file.",
+        url: "https://jonesy836.gumroad.com/l/soulrank",
+        button: "🧠 UNLOCK MY MEMORY FILE"
+      },
+      {
+        name: "Frequency Leak",
+        title: "📡 The Frequency Leak™",
+        desc: "You're broadcasting insecurity. Your aura is traceable. Download the encryption fix.",
+        url: "https://jonesy836.gumroad.com/l/soulrank",
+        button: "🔒 PATCH THE LEAK"
       }
+    ];
 
-      result.innerHTML = "";
-      loading.innerHTML = "✨ Scanning the stars...";
+    const randomFunnel = funnels[Math.floor(Math.random() * funnels.length)];
 
-      setTimeout(() => {
-        loading.innerHTML = "";
-
-        const tiers = [
-          {
-            title: "🧱 Builder SoulRank™",
-            desc: "You were born to construct. Your mind is organized, grounded, and powerful.",
-            url: "https://jonesy836.gumroad.com/l/jhafnb",
-            price: "£3.33"
-          },
-          {
-            title: "🛡️ Guardian SoulRank™",
-            desc: "You protect energy fields, guard hearts, and restore spiritual order.",
-            url: "https://jonesy836.gumroad.com/l/neesb",
-            price: "£5.55"
-          },
-          {
-            title: "🌌 Ascended SoulRank™",
-            desc: "You carry rare divine codes. Your life path reveals Tier 33 — few are chosen.",
-            url: "https://jonesy836.gumroad.com/l/wyezv",
-            price: "£7.77"
-          }
-        ];
-
-        const chosen = tiers[Math.floor(Math.random() * tiers.length)];
-
-        result.innerHTML = `
-          <h2>${chosen.title}</h2>
-          <p>${chosen.desc}</p>
-          <a href="${chosen.url}" class="button-link" target="_blank">🔓 Unlock Full Soul Report – ${chosen.price}</a>
-        `;
-      }, 1800);
-    }
+    document.getElementById("funnel").innerHTML = `
+      <h1>${randomFunnel.title}</h1>
+      <p>${randomFunnel.desc}</p>
+      <a href="${randomFunnel.url}" class="button-link" target="_blank">${randomFunnel.button}</a>
+    `;
   </script>
 </body>
 </html>
