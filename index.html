@@ -3,101 +3,110 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Soul Gateway</title>
+  <title>Trinity Exchange Gateway</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0b0a13;
+      background: #00040f;
       color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
+      justify-content: flex-start;
+      min-height: 100vh;
       margin: 0;
       padding: 2rem;
       text-align: center;
     }
     h1 {
-      font-size: 2rem;
+      font-size: 2.4rem;
       margin-bottom: 0.6rem;
     }
     p {
-      font-size: 1rem;
+      font-size: 1.1rem;
       margin-bottom: 1.2rem;
       color: #ccc;
+      max-width: 600px;
     }
-    button {
+    input, button {
       padding: 0.8rem 1.6rem;
       font-size: 1rem;
-      border: none;
       border-radius: 6px;
-      background: linear-gradient(135deg, #b624fe, #7a6ff0);
+      margin: 0.5rem;
+    }
+    input {
+      border: 1px solid #555;
+      width: 200px;
+      background: #111;
+      color: #fff;
+    }
+    button {
+      border: none;
+      background: linear-gradient(135deg, #2ff4b2, #22aaff);
       color: white;
       cursor: pointer;
       transition: transform 0.2s;
-      margin-top: 1rem;
     }
     button:hover {
       transform: scale(1.05);
     }
     #result {
       margin-top: 2rem;
+      font-size: 1.2rem;
+      color: #00ff99;
     }
-    a.button-link {
-      display: inline-block;
-      margin-top: 1.2rem;
-      background: #ff5f9e;
-      padding: 0.8rem 1.5rem;
-      border-radius: 6px;
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
+    .testimonials {
+      margin-top: 3rem;
+      max-width: 800px;
+      color: #ddd;
     }
-    .offering-note {
-      margin-top: 0.8rem;
-      font-size: 0.85rem;
-      color: #888;
+    .testimonial {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      font-style: italic;
+    }
+    .testimonial strong {
+      color: #2ff4b2;
     }
   </style>
 </head>
 <body>
-  <div id="funnel"></div>
+  <h1>💠 Welcome to the Trinity Exchange</h1>
+  <p>Insert a small offering and receive back 3x the energy — if the alignment is right. One chance. No resets. No refunds.</p>
+
+  <input type="number" id="amount" placeholder="Enter £ amount" min="1" />
+  <button onclick="exchange()">⚡ INITIATE EXCHANGE</button>
+
   <div id="result"></div>
 
+  <div class="testimonials">
+    <h2>✨ What Others Are Saying</h2>
+    <div class="testimonial">“I only put in £3.33 and got £10 back within 48 hours. Still can’t explain it but I’m not questioning the magic.”<br><strong>— Rani, London</strong></div>
+    <div class="testimonial">“Didn’t believe it would work. Tried once and received 3x what I gave. Energy is real.”<br><strong>— Marcus, Leeds</strong></div>
+    <div class="testimonial">“The alignment came through right before rent was due. This gateway changed everything.”<br><strong>— Zahir, Manchester</strong></div>
+  </div>
+
   <script>
-    const funnels = [
-      {
-        name: "Unmarked Path",
-        title: "🌌 The Unmarked Path™",
-        desc: "You chose a path before birth. This isn't it. Your offering activates your original soul blueprint.",
-        url: "https://jonesy836.gumroad.com/l/jhafnb",
-        button: "🔥 MAKE MY SOUL OFFERING"
-      },
-      {
-        name: "Memory Before",
-        title: "🧠 The Memory Before™",
-        desc: "You're trying to remember something you were never told. An offering will unlock your suppressed incarnation file.",
-        url: "https://jonesy836.gumroad.com/l/neesb",
-        button: "🧠 MAKE MY SOUL OFFERING"
-      },
-      {
-        name: "Frequency Leak",
-        title: "📡 The Frequency Leak™",
-        desc: "You're broadcasting insecurity. Your aura is traceable. Your offering patches the leak and restores alignment.",
-        url: "https://jonesy836.gumroad.com/l/wyezv",
-        button: "🔒 MAKE MY SOUL OFFERING"
+    function exchange() {
+      const amount = parseFloat(document.getElementById('amount').value);
+      const resultDiv = document.getElementById('result');
+
+      if (!amount || amount < 1) {
+        resultDiv.innerHTML = "🚫 Invalid amount. Please enter at least £1.";
+        return;
       }
-    ];
 
-    const randomFunnel = funnels[Math.floor(Math.random() * funnels.length)];
+      const fate = Math.random();
 
-    document.getElementById("funnel").innerHTML = `
-      <h1>${randomFunnel.title}</h1>
-      <p>${randomFunnel.desc}</p>
-      <a href="${randomFunnel.url}" class="button-link" target="_blank">${randomFunnel.button}</a>
-      <p class="offering-note">💫 Your energy offering supports the Global Alignment Grid™ and the awakening of others. Thank you.</p>
-    `;
+      if (fate > 0.4) {
+        const reward = (amount * 3).toFixed(2);
+        resultDiv.innerHTML = `✅ Exchange Accepted. You will receive £${reward}.<br><br><em>(Exchange processing... please check back within 72 hours.)</em>`;
+      } else {
+        resultDiv.innerHTML = `❌ Exchange Denied. Alignment not sufficient. You may try again in 7 days.`;
+      }
+    }
   </script>
 </body>
 </html>
